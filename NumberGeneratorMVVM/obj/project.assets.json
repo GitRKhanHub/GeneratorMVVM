@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
+      "projectUniqueName": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\GeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
       "projectName": "NumberGeneratorMVVM",
-      "projectPath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
+      "projectPath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\GeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
       "packagesPath": "C:\\Users\\Rifat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\NumberGeneratorMVVM\\obj\\",
+      "outputPath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\GeneratorMVVM\\NumberGeneratorMVVM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rifat\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -10,13 +10,16 @@ namespace NumberGeneratorMVVM
     {
         private static int _period;
 
-        public static int Period
+        public int Period
         {
             get => _period;
             set
             {
                 _period = value;
-                //OnPropertyChanged("Period");
+                GeneratorVMs[0].Period = _period;
+                GeneratorVMs[1].Period = _period;
+                GeneratorVMs[2].Period = _period;
+                OnPropertyChanged("Period");
             }
         }
 
@@ -24,7 +27,11 @@ namespace NumberGeneratorMVVM
         {
             new GeneratorVM(), new GeneratorVM{}, new GeneratorVM{}
         };
-        public ObservableCollection<GeneratorVM> GeneratorVMs => _generatorVMs;
+        public ObservableCollection<GeneratorVM> GeneratorVMs
+        {
+            get { return _generatorVMs; }
+            set { ; }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

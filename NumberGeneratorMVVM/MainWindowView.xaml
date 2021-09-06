@@ -6,38 +6,116 @@
         xmlns:local="clr-namespace:NumberGeneratorMVVM"
         mc:Ignorable="d"
         Title="MainWindowView" Height="450" Width="800">
-    <Window.DataContext>
+    <Window.Resources>
+
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="1"  Background="#27A2C9" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#27A2C9"  BorderThickness="1"  Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse Height="10" Width="10" Fill="#27A2C9"></Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <!--<Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />-->
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+            <Window.DataContext>
         <local:MainWindowVM/>
         <!-- Создаем новый VM и соединяем его со View -->
     </Window.DataContext>
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <DockPanel Grid.Row="0" Grid.ColumnSpan="3" >
-            <TextBox Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Width="50" DockPanel.Dock="Right"/>
-            <Slider x:Name ="Slider"   Minimum="100" Maximum="1000" SelectionStart="100" Height="30" 
-                    IsSelectionRangeEnabled="True" TickPlacement="Both" TickFrequency="100" IsSnapToTickEnabled="True" Value="{Binding Period}" AutoToolTipPlacement="BottomRight"/>
-        </DockPanel>
-        <local:GeneratorView Grid.Row ="1"  Grid.Column ="0"
+        
+            <local:GeneratorView Grid.Row ="0"  Grid.Column ="0"
                              DataContext="{Binding GeneratorVMs[0]}"/>
 
-        <local:GeneratorView Grid.Row ="1" Grid.Column ="1"
+        <local:GeneratorView Grid.Row ="0" Grid.Column ="1"
                              DataContext="{Binding GeneratorVMs[1]}"/>
 
-        <local:GeneratorView Grid.Row ="1" Grid.Column ="2"
+        <local:GeneratorView Grid.Row ="0" Grid.Column ="2"
                              DataContext="{Binding GeneratorVMs[2]}"/>
 
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="3" >
+            <TextBox Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Height="20" Width="50" DockPanel.Dock="Right"/>
+            <Slider Style="{StaticResource Horizontal_Slider}" x:Name ="Slider"   Minimum="100" Maximum="1000" SelectionStart="100" Height="30" Width="300" 
+                    IsSelectionRangeEnabled="True" TickFrequency="100" IsSnapToTickEnabled="True" Value="{Binding Period}" AutoToolTipPlacement="BottomRight" Foreground="Aqua">
+                
+            </Slider>
+        </DockPanel>
             
-        <!--<DockPanel Grid.Column="2">
+                <!--<DockPanel Grid.Column="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <Button Content="Старт" Margin="5" Command="{Binding GeneratorVMs[2].StartGenerateCommand}"/>
                 <Button Content="Стоп" Margin="5" Command="{Binding GeneratorVMs[2].StopGenerateCommand}"/>

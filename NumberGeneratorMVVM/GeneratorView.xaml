@@ -9,11 +9,36 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel Grid.Column="0">
-            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <Button Content="Старт" Margin="5" Command="{Binding StartGenerateCommand}"/>
-                <Button Content="Стоп" Margin="5" Command="{Binding StopGenerateCommand}"/>
-            </StackPanel>
-            <ListBox  x:Name="TheListBox0" ItemsSource="{Binding UsingValues}">
+            <DockPanel DockPanel.Dock="Bottom">
+                
+                    <Button Content="Старт" Margin="5" Command="{Binding StartGenerateCommand}" 
+                        Background="#8CC6D8" 
+                        DockPanel.Dock="Left"
+                        Width="60">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Стоп" Margin="5" Command="{Binding StopGenerateCommand}" 
+                        Background="#FFA396"
+                        DockPanel.Dock="Right"
+                        Width="60">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                    
+            </DockPanel>
+            <Border 
+                    BorderBrush="#27A2C9" 
+                    BorderThickness="2" 
+                    >
+            <ListBox  x:Name="TheListBox0"  ItemsSource = "{Binding UsingValues}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="5">
@@ -27,6 +52,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            </Border>
         </DockPanel>
     </Grid>
 </UserControl>

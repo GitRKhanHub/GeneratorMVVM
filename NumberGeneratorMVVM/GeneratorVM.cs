@@ -12,7 +12,8 @@ namespace NumberGeneratorMVVM
     {
         private RelayCommand _startGenerateCommand;
         private RelayCommand _stopGenerateCommand;
-        private static int _period;
+        private int _period;
+        private Timer _timer;
 
         readonly GeneratorModel _generatorModel = new GeneratorModel();
 
@@ -20,11 +21,28 @@ namespace NumberGeneratorMVVM
 
         public ReadOnlyObservableCollection<ListItem> UsingValues => _generatorModel.UsingValues;
 
-        public Timer Timer;
+        public Timer Timer
+        {
+            get { return _timer;}
+            set
+            {
+                _timer = value;
+            }
+        }
 
         public bool StartNotClicked = true;
 
-        
+        public int Period
+        {
+            get { return _period; }
+            set
+            {
+                _period = value;
+            }
+
+        }
+
+
         // команда генерации числа с периодом
         public RelayCommand StartGenerateCommand
         {
@@ -33,15 +51,20 @@ namespace NumberGeneratorMVVM
                 return _startGenerateCommand ??
                        (_startGenerateCommand = new RelayCommand(obj =>
                        {
-                           if (StartNotClicked)
-                           {
-                               //_generatorModel.AddValue(obj);
-                               // устанавливаем метод обратного вызова генерации числа
-                               TimerCallback tm = new TimerCallback(_generatorModel.AddValue);
+                           if (Timer != null)
+                               Timer.Change(Timeout.Infinite, Timeout.Infinite);
+
+                           //if (StartNotClicked)
+                           //{
+                           //_generatorModel.AddValue(obj);
+
+                           // устанавливаем метод обратного вызова генерации числа
+                           TimerCallback tm = new TimerCallback(_generatorModel.AddValue);
                                // создаем таймер
-                               Timer = new Timer(tm, null, 0, MainWindowVM.Period);
-                           }
-                           StartNotClicked = false;
+                           Timer = new Timer(tm, null, 0, Period);
+
+                           //}
+                           //StartNotClicked = false;
                        }));
             }
         }
@@ -57,7 +80,8 @@ namespace NumberGeneratorMVVM
                            // останавливаем таймер
                            if(Timer != null)
                                Timer.Change(Timeout.Infinite, Timeout.Infinite);
-                           StartNotClicked = true;
+
+                           //StartNotClicked = true;
                        }));
             }
         }

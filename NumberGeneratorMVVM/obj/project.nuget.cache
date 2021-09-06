@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q7NF2IPGksVYNYOwTMJsIkalQqmlfTmmeC4E/Kbc5GmcUbk1amO2kaqDqA/lcn1kcclYnERP7BrN6BKIyBsX8A==",
+  "dgSpecHash": "fHWBdhfIHKBfDgOH2HHVVAzWWUY5hcnqT2QrcBmsRY+FahMbSVEHkPzGeuZIuojWL9/Ou7Pbni5tqNUdgPJJxw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
+  "projectFilePath": "C:\\Users\\Rifat\\source\\repos\\NumberGeneratorMVVM\\GeneratorMVVM\\NumberGeneratorMVVM\\NumberGeneratorMVVM.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
