@@ -16,7 +16,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  BorderThickness="1"  Background="#27A2C9" Height="3"/>
+                        <Border  BorderThickness="1"  Background="#27A2C9" Height="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -28,7 +28,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border SnapsToDevicePixels="True" Background="#27A2C9"  BorderThickness="1"  Height="3"/>
+                        <Border SnapsToDevicePixels="True" Background="#27A2C9"  BorderThickness="1"  Height="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -40,14 +40,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="10" Width="10" Fill="#27A2C9"></Ellipse>
+                        <Ellipse Height="15" Width="15" Fill="#27A2C9"></Ellipse>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <ControlTemplate x:Key="Slider"  TargetType="Slider">
-            <Grid>
+            <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
@@ -73,8 +73,8 @@
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Style.Triggers>
                 <Trigger Property="Orientation" Value="Horizontal">
-                    <!--<Setter Property="MinHeight" Value="21" />
-                    <Setter Property="MinWidth" Value="104" />-->
+                    <Setter Property="MinHeight" Value="24" />
+                    <Setter Property="MinWidth" Value="104" />
                     <Setter Property="Template" Value="{StaticResource Slider}" />
                 </Trigger>
             </Style.Triggers>
@@ -85,7 +85,7 @@
         <local:MainWindowVM/>
         <!-- Создаем новый VM и соединяем его со View -->
     </Window.DataContext>
-    <Grid>
+    <Grid Background="#2E2C33" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -94,26 +94,29 @@
             </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        
-            <local:GeneratorView Grid.Row ="0"  Grid.Column ="0"
-                             DataContext="{Binding GeneratorVMs[0]}"/>
 
-        <local:GeneratorView Grid.Row ="0" Grid.Column ="1"
-                             DataContext="{Binding GeneratorVMs[1]}"/>
+        <TextBlock Grid.Row = "0" Grid.ColumnSpan="3" Text="Генератор чисел" TextAlignment="Center"  Margin ="5" Foreground="#27A2C9" FontSize="30" HorizontalAlignment="Center"/>
 
-        <local:GeneratorView Grid.Row ="0" Grid.Column ="2"
-                             DataContext="{Binding GeneratorVMs[2]}"/>
+        <local:GeneratorView Grid.Row ="1"  Grid.Column ="0"
+                             DataContext="{Binding GeneratorVMs[0]}" Margin="5"/>
 
-        <DockPanel Grid.Row="1" Grid.ColumnSpan="3" >
-            <TextBox Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Height="20" Width="50" DockPanel.Dock="Right"/>
+        <local:GeneratorView Grid.Row ="1" Grid.Column ="1"
+                             DataContext="{Binding GeneratorVMs[1]}" Margin="5"/>
+
+        <local:GeneratorView Grid.Row ="1" Grid.Column ="2"
+                             DataContext="{Binding GeneratorVMs[2]}" Margin="5"/>
+
+        <StackPanel  Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding ElementName=Slider, Path=Minimum}" TextAlignment="Center" Height="20" Width="50" Margin ="5" Foreground="White"/>
             <Slider Style="{StaticResource Horizontal_Slider}" x:Name ="Slider"   Minimum="100" Maximum="1000" SelectionStart="100" Height="30" Width="300" 
                     IsSelectionRangeEnabled="True" TickFrequency="100" IsSnapToTickEnabled="True" Value="{Binding Period}" AutoToolTipPlacement="BottomRight" Foreground="Aqua">
-                
             </Slider>
-        </DockPanel>
+            <TextBlock Text="{Binding ElementName=Slider, Path=Maximum}" TextAlignment="Center" Height="20" Width="50" Margin ="5" Foreground="White"/>
+        </StackPanel>
             
                 <!--<DockPanel Grid.Column="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
