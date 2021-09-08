@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Text;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace NumberGeneratorMVVM
 {
@@ -30,8 +34,7 @@ namespace NumberGeneratorMVVM
             }
         }
 
-        public bool StartNotClicked = true;
-
+        
         public int Period
         {
             get { return _period; }
@@ -54,17 +57,11 @@ namespace NumberGeneratorMVVM
                            if (Timer != null)
                                Timer.Change(Timeout.Infinite, Timeout.Infinite);
 
-                           //if (StartNotClicked)
-                           //{
-                           //_generatorModel.AddValue(obj);
-
                            // устанавливаем метод обратного вызова генерации числа
                            TimerCallback tm = new TimerCallback(_generatorModel.AddValue);
-                               // создаем таймер
+                           // создаем таймер
                            Timer = new Timer(tm, null, 0, Period);
 
-                           //}
-                           //StartNotClicked = false;
                        }));
             }
         }
@@ -81,15 +78,10 @@ namespace NumberGeneratorMVVM
                            if(Timer != null)
                                Timer.Change(Timeout.Infinite, Timeout.Infinite);
 
-                           //StartNotClicked = true;
                        }));
             }
         }
-        public GeneratorVM()
-        {
-            
-        }
-
+        
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -13,14 +13,12 @@ namespace NumberGeneratorMVVM
         private readonly ObservableCollection<ListItem> _values = new ObservableCollection<ListItem>();
         public readonly ReadOnlyObservableCollection<ListItem> UsingValues;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public GeneratorModel()
         {
             UsingValues = new ReadOnlyObservableCollection<ListItem>(_values); 
         }
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // добавляем сгенерированное число в коллекцию
         public void AddValue(object obj)

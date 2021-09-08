@@ -105,20 +105,31 @@
         <Border Grid.Row ="0" 
                 BorderBrush="#27A2C9" 
                 BorderThickness="2">
-            <ListBox  x:Name="TheListBox0"  ItemsSource = "{Binding UsingValues}" DockPanel.Dock="Top">
-                <ListBox.ItemTemplate>
+
+            <local:AutoScrollListView  x:Name="TheListBox0"  ItemsSource = "{Binding UsingValues}">
+                <local:AutoScrollListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                   MaxWidth="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                   ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                   MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                   ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                    </ItemsPanelTemplate>
+                </local:AutoScrollListView.ItemsPanel>
+
+                <local:AutoScrollListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="5">
-                            <TextBlock x:Name="myNum" FontSize="16" Text="{Binding Path=NumValue}" HorizontalAlignment="Center" />
-                        </StackPanel>
+
+                        <TextBlock x:Name="myNum" FontSize="16" Text="{Binding Path=NumValue}" HorizontalAlignment="Center"/>
+
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding IsSimple}" Value= "true">
                                 <Setter TargetName="myNum" Property="Foreground" Value="Red" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </local:AutoScrollListView.ItemTemplate>
+            </local:AutoScrollListView>
         </Border>
 
         <Button x:Name ="StartBut"  Grid.Row="1" Content="Старт" Margin="5" Command="{Binding StartGenerateCommand}" 

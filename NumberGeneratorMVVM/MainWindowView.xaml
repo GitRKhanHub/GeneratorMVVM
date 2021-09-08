@@ -81,17 +81,18 @@
         </Style>
     </Window.Resources>
 
-            <Window.DataContext>
+    <Window.DataContext>
         <local:MainWindowVM/>
         <!-- Создаем новый VM и соединяем его со View -->
     </Window.DataContext>
+
     <Grid Background="#2E2C33" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -117,8 +118,8 @@
             </Slider>
             <TextBlock Text="{Binding ElementName=Slider, Path=Maximum}" TextAlignment="Center" Height="20" Width="50" Margin ="5" Foreground="White"/>
         </StackPanel>
-            
-                <!--<DockPanel Grid.Column="2">
+
+        <!--<DockPanel Grid.Column="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <Button Content="Старт" Margin="5" Command="{Binding GeneratorVMs[2].StartGenerateCommand}"/>
                 <Button Content="Стоп" Margin="5" Command="{Binding GeneratorVMs[2].StopGenerateCommand}"/>
